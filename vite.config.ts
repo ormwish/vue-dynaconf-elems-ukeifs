@@ -1,7 +1,18 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue'; // Add Vue plugin
+import monkey from 'vite-plugin-monkey';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-})
+  plugins: [
+    vue(), // Ensure you add the Vue plugin here
+    monkey({
+      entry: 'src/App.vue', // Corrected entry to point to App.vue
+      userscript: {
+        name: 'Dynamic Userscript',
+        namespace: 'https://my.namespace.com/',
+        match: ['https://example.com/*'],
+        grant: ['GM_xmlhttpRequest'],
+      },
+    }),
+  ],
+});
